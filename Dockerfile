@@ -49,10 +49,11 @@ RUN git clone https://github.com/sowri1986/awsdemo.git .
 COPY . .
 
 RUN pip3 install -r requirements.txt
-
     
 # Switch to the non-privileged user to run the application.
 USER appuser
+
+ENV HOME /home/appuser
 
 # Expose the port that the application listens on.
 EXPOSE 8501
