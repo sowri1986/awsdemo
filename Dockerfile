@@ -44,7 +44,9 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 RUN git clone https://github.com/sowri1986/awsdemo.git .
 
-RUN pip3 install -r requirements.txt
+RUN ls
+
+RUN pip3 install -r awsdemo/requirements.txt
     
 # Switch to the non-privileged user to run the application.
 USER appuser
