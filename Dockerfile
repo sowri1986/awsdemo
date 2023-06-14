@@ -42,7 +42,7 @@ RUN apt-get update && apt-get install -y \
 RUN --mount=type=cache,target=/root/.cache/pip3 \
     --mount=type=bind,source=requirements.txt,target=requirements.txt
 
-RUN git clone https://github.com/sowri1986/awsdemo.git .
+#RUN git clone https://github.com/sowri1986/awsdemo.git .
 #RUN git clone https://github.com/streamlit/streamlit-example.git .
 
 # Copy the source code into the container.

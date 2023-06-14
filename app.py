@@ -3,8 +3,6 @@ import logging
 import boto3
 from botocore.exceptions import ClientError
 
-
-
 def upload_file(uploaded_file, bucket,fileName):
     
     # Upload the file
