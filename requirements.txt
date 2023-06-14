@@ -1,3 +1,3 @@
-altair
-pandas
 streamlit
+boto3
+logging
