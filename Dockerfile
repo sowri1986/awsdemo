@@ -36,24 +36,23 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 # Download dependencies as a separate step to take advantage of Docker's caching.
-# Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
+# Leverage a cache mount to /root/.cache/pip3 to speed up subsequent builds.
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
-RUN --mount=type=cache,target=/root/.cache/pip \
+RUN --mount=type=cache,target=/root/.cache/pip3 \
     --mount=type=bind,source=requirements.txt,target=requirements.txt
 
 RUN git clone https://github.com/sowri1986/awsdemo.git .
+#RUN git clone https://github.com/streamlit/streamlit-example.git .
 
-RUN ls
+# Copy the source code into the container.
+COPY . .
 
-RUN pip3 install -r awsdemo/requirements.txt
+RUN pip3 install -r requirements.txt
     
 # Switch to the non-privileged user to run the application.
 USER appuser
 
-
-# Copy the source code into the container.
-COPY . .
 
 # Expose the port that the application listens on.
 EXPOSE 8501
@@ -61,4 +60,4 @@ EXPOSE 8501
 HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
 # Run the application.
-CMD streamlit run streamlit_app.py --server.port=8501 --server.address=0.0.0.0
+CMD streamlit run app.py --server.port=8501 --server.address=0.0.0.0
